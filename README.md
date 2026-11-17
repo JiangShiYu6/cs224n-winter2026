@@ -18,6 +18,6 @@ In VS Code, select the repository's `.venv` Python interpreter as the notebook k
 
 IMDb and GloVe are downloaded separately; datasets, model caches, and virtual environments are excluded from this repository. A compatible GloVe cache at `.cache/gensim/glove-wiki-gigaword-200/` is reused when available.
 
-## Course source and submission
+## Course source and study workflow
 
-Original assignment materials are provided by the [Stanford CS224N Winter 2026 course](https://web.stanford.edu/class/cs224n/). This private repository is for personal study and version control. Official enrolled-student submission is through Gradescope; Assignment 1 requests a PDF exported from the completed notebook.
+Original assignment materials are provided by the [Stanford CS224N Winter 2026 course](https://web.stanford.edu/class/cs224n/). This public repository records personal self-study work and completed assignments. Work is saved and versioned on GitHub; it is not submitted to Gradescope.
