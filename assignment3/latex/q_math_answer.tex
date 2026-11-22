@@ -1,0 +1,36 @@
+\newcommand{\attentionCopyWeights}{%
+    Softmax assigns almost all the weight to position $j$ when its score $k_j^\top q$ exceeds every other score by a large enough margin that $\sum_{i\ne j}\exp(k_i^\top q-k_j^\top q)\ll 1$.
+}
+
+\newcommand{\attentionCopyOutput}{%
+    Since $\alpha_j\approx 1$ and the remaining weights are close to zero, the weighted sum is $c=\sum_i\alpha_i v_i\approx v_j$.
+}
+
+\newcommand{\attentionAverage}{%
+    Let $q=M(k_a+k_b)$ for a sufficiently large $M>0$. The keys are orthonormal, so $k_a^\top q=k_b^\top q=M$ and $k_i^\top q=0$ for all other positions. Thus
+    \[
+        \alpha_a=\alpha_b=\frac{e^M}{2e^M+n-2}\longrightarrow \frac12
+        \qquad\text{as }M\to\infty.
+    \]
+    The remaining weights tend to zero, so $c\approx\tfrac12(v_a+v_b)$.
+}
+
+\newcommand{\attentionSingleSmallNoise}{%
+    Fix a sufficiently large $M>0$ and choose $q=M(\mu_a+\mu_b)$. As $\alpha\to 0$, the sampled keys approach their means, so the scores at $a$ and $b$ approach $M$ and the other scores approach zero. The weights are therefore close to those in (b), giving $c\approx\tfrac12(v_a+v_b)$.
+}
+
+\newcommand{\attentionSingleLargeNoise}{%
+    For small $\alpha$, write $k_a\approx (1+z)\mu_a$ with $z\sim\mathcal N(0,\tfrac12)$. The scores at $a$ and $b$ are approximately $M(1+z)$ and $M$, so their weight ratio is approximately $e^{Mz}$. Large positive values of $Mz$ pull $c$ toward $v_a$, and large negative values pull it toward $v_b$. When $v_a$ and $v_b$ are distinct, the output varies more across samples than in (i).
+}
+
+\newcommand{\attentionMultiSmallNoise}{%
+    Choose $q_1=M\mu_a$ and $q_2=M\mu_b$ for a sufficiently large $M>0$. For small $\alpha$, the first head scores $a$ near $M$ and all other positions near zero. Its weight on $a$ is therefore close to $e^M/(e^M+n-1)\approx 1$, so $c_1\approx v_a$. The second head similarly gives $c_2\approx v_b$. Averaging gives $c=\tfrac12(c_1+c_2)\approx\tfrac12(v_a+v_b)$.
+}
+
+\newcommand{\attentionMultiLargeNoise}{%
+    The first head still gives $c_1\approx v_a$ whenever the score at $a$ stays well above zero. If that score approaches zero, other positions gain weight and $c_1$ can vary. Because $q_2$ is orthogonal to $\mu_a$, the variation of $k_a$ along $\mu_a$ contributes nothing to the second head's score at $a$. Thus $c_2$ stays close to $v_b$ with little variance. The average is usually near $\tfrac12(v_a+v_b)$, and fluctuations in $c_1$ enter the final output at half their amplitude.
+}
+
+\newcommand{\attentionSummary}{%
+    A single head needs nearly equal scores at $a$ and $b$ to give them equal weight. Two heads can each focus on one target and then average their outputs. Their top scores can differ substantially, provided each target still scores well above the other positions within its own head.
+}

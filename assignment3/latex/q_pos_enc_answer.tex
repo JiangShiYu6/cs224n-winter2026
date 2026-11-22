@@ -1,0 +1,36 @@
+
+
+\newcommand{\positionPermutationProof}{%
+    For example, $\mathbf Q_{\mathrm{perm}}=(\mathbf P\mathbf X)\mathbf W_Q=\mathbf P\mathbf Q$.
+    The same argument gives $\mathbf K_{\mathrm{perm}}=\mathbf P\mathbf K$ and $\mathbf V_{\mathrm{perm}}=\mathbf P\mathbf V$.
+    Let $\mathbf A=\mathbf Q\mathbf K^\top/\sqrt d$. Then
+    $\mathbf A_{\mathrm{perm}}=\mathbf P\mathbf A\mathbf P^\top$.
+    Using the given softmax identity and $\mathbf P^\top\mathbf P=\mathbf I$ gives
+    \[
+        \mathbf H_{\mathrm{perm}}
+        =\operatorname{softmax}(\mathbf P\mathbf A\mathbf P^\top)\mathbf P\mathbf V
+        =\mathbf P\operatorname{softmax}(\mathbf A)\mathbf V
+        =\mathbf P\mathbf H.
+    \]
+    Since $\mathbf P\mathbf 1=\mathbf 1$, the given ReLU identity gives
+    \begin{align*}
+        \mathbf Z_{\mathrm{perm}}
+        &=\operatorname{ReLU}\bigl(\mathbf P(\mathbf H\mathbf W_1+\mathbf 1\mathbf b_1)\bigr)
+          \mathbf W_2+\mathbf P\mathbf 1\mathbf b_2\\
+        &=\mathbf P\bigl(\operatorname{ReLU}(\mathbf H\mathbf W_1+\mathbf 1\mathbf b_1)
+          \mathbf W_2+\mathbf 1\mathbf b_2\bigr)
+        =\mathbf P\mathbf Z.
+    \end{align*}
+}
+
+\newcommand{\positionWordOrder}{%
+    Shuffling the tokens only shuffles their output representations. For example, the representation of \texttt{dog} would be the same in \textit{dog bites man} and \textit{man bites dog}, even though the word order changes who does the biting.
+}
+
+\newcommand{\positionEmbeddingHelps}{%
+    Yes. When tokens are shuffled, each position keeps its own embedding, so the new input is $\mathbf P\mathbf X+\Phi$. Shuffling the original position-enriched input would give $\mathbf P\mathbf X+\mathbf P\Phi$. These generally differ, so the model can use token positions when computing attention.
+}
+
+\newcommand{\positionEmbeddingUnique}{%
+    No. The first two coordinates at position $t$ are $(\sin t,\cos t)$. If positions $t$ and $s$ had identical embeddings, these two coordinates would match, requiring $t-s=2\pi m$ for an integer $m$. Since $t-s$ is an integer and $2\pi m$ is irrational for every nonzero integer $m$, we must have $m=0$ and $t=s$.
+}
