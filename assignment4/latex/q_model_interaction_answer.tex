@@ -1,0 +1,17 @@
+
+
+\begin{answer}
+\textbf{Independent defensive exercise.}
+I did not run the course password extraction challenges against G, H, and I.
+Instead, I evaluated a local output filter with a synthetic marker and fixed
+response strings. No model, course service, or real password was used.
+
+The filter blocked both standalone and embedded occurrences of the marker.
+It passed the benign string and the partial match unchanged. The audit log
+recorded two block events without including the marker, and the filter
+rejected an empty marker configuration. All six checks passed.
+
+This only verifies literal matching on these fixtures. It does not establish
+that a deployed model can keep a secret. An application should keep real
+credentials outside model context and enforce authorization separately.
+\end{answer}
